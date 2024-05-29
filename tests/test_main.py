@@ -20,5 +20,3 @@ def test_shape_get_data(input_data, perimeter, area):
     shape = Shape(input_data)
     assert shape.perimeter == perimeter
     assert shape.area == area
-
-#pytest -q tests/test_main.py
