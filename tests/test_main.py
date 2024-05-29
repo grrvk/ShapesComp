@@ -3,6 +3,7 @@ import sys
 
 sys.path.append(".")
 from src.scheme import Shape
+from src.utils import dispatcher
 
 
 @pytest.mark.parametrize("input_data, perimeter, area", [
@@ -17,6 +18,7 @@ from src.scheme import Shape
     ("Circle Center 1 1 Radius -4", None, None),
 ])
 def test_shape_get_data(input_data, perimeter, area):
-    shape = Shape(input_data)
+    shape, input_array = dispatcher(input_data)
+    shape.calculate(input_array)
     assert shape.perimeter == perimeter
     assert shape.area == area
