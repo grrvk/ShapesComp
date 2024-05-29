@@ -1,6 +1,6 @@
 ## Shape area and perimeter computing
 
-Creates shapes from data collected from input, computes area and perimeter. For square and circle figure validates side and radius length.
+Creates shapes from data collected from input, computes area and perimeter. For square and circle figure validates side and radius length.  
 For common shapes such as Square, Rectangle and Circle creates child class (parent - shape) objects, for others - uses parent class Shape.  
 for common pointy shapes accepts two types of input and can compute using two formulas.
 
