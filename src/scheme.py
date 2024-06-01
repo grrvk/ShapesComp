@@ -12,18 +12,27 @@ class Shape:
         self.perimeter = None
         self.area = None
 
+    def calculate(self, input_data):
+        self.input_data(input_data)
+        self.calculate_perimeter()
+        self.calculate_area()
+
+    def input_data(self, input_data):
+        pass
+
+    def calculate_perimeter(self):
+        pass
+
+    def calculate_area(self):
+        pass
+
 
 class Polygon(Shape):
     def __init__(self, name=None):
         super().__init__(name)
         self.points = None
 
-    def calculate(self, input_data_array):
-        self.get_points_input(input_data_array)
-        self.calculate_perimeter()
-        self.calculate_area()
-
-    def get_points_input(self, input_data_array):
+    def input_data(self, input_data_array):
         points = []
         try:
             for i, entry in enumerate(input_data_array):
@@ -62,7 +71,7 @@ class Rectangle(Polygon):
         self.BottomLeft = None
 
     def calculate(self, input_data_array):
-        if not self.get_rectangle_input(input_data_array): self.get_points_input(input_data_array)
+        if not self.get_rectangle_input(input_data_array): self.input_data(input_data_array)
         self.calculate_perimeter()
         self.calculate_area()
 
@@ -99,7 +108,7 @@ class Square(Rectangle):
         self.Side = None
 
     def calculate(self, input_data_array):
-        if not self.get_square_input(input_data_array): self.get_points_input(input_data_array)
+        if not self.get_square_input(input_data_array): self.input_data(input_data_array)
         if not self.calculate_perimeter(): super().calculate_perimeter()
         if not self.calculate_area(): super().calculate_area()
 
@@ -112,7 +121,7 @@ class Square(Rectangle):
             if self.Side <= 0:
                 self.Side = None
                 return False
-            self.BottomLeft = (self.TopRight[0]-self.Side, self.TopRight[1]-self.Side)
+            self.BottomLeft = (self.TopRight[0] - self.Side, self.TopRight[1] - self.Side)
             return True
         except Exception:
             return False
@@ -124,12 +133,7 @@ class Circle(Shape):
         self.Center = None
         self.Radius = None
 
-    def calculate(self, input_data_array):
-        self.get_circle_input(input_data_array)
-        self.calculate_perimeter()
-        self.calculate_area()
-
-    def get_circle_input(self, input_data_array):
+    def input_data(self, input_data_array):
         try:
             if "Center" not in input_data_array or "Radius" not in input_data_array: return False
             self.Center = [float(input_data_array[input_data_array.index('Center') + 1]),
