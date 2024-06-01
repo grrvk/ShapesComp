@@ -91,8 +91,8 @@ class Square(Rectangle):
 
     def calculate(self, input_data_array):
         if not self.get_square_input(input_data_array): self.get_points_input(input_data_array)
-        if not self.calculate_perimeter_square(): self.calculate_perimeter_pointed()
-        if not self.calculate_area_square(): self.calculate_area_pointed()
+        if not self.calculate_perimeter_rectangle(): self.calculate_perimeter_pointed()
+        if not self.calculate_area_rectangle(): self.calculate_area_pointed()
 
     def get_square_input(self, input_data_array):
         try:
@@ -103,18 +103,10 @@ class Square(Rectangle):
             if self.Side <= 0:
                 self.Side = None
                 return False
+            self.BottomLeft = (self.TopRight[0]-self.Side, self.TopRight[1]-self.Side)
             return True
         except Exception:
             return False
-
-    def calculate_perimeter_square(self):
-        if not self.Side: return None
-        self.perimeter = 4 * self.Side
-
-    def calculate_area_square(self):
-        if not self.Side: return None
-        self.area = self.Side * self.Side
-
 
 
 class Circle(Shape):
