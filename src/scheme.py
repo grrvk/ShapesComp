@@ -50,7 +50,40 @@ class Shape:
             return f'Shape {self.name}: Invalid input. Cannot compute perimeter and area'
 
 
-class Square(Shape):
+class Rectangle(Shape):
+    def __init__(self, name="Rectangle"):
+        super().__init__(name=name)
+        self.TopRight = None
+        self.BottomLeft = None
+
+    def calculate(self, input_data_array):
+        if not self.get_rectangle_input(input_data_array): self.get_points_input(input_data_array)
+        if not self.calculate_perimeter_rectangle(): self.calculate_perimeter_pointed()
+        if not self.calculate_area_rectangle(): self.calculate_area_pointed()
+
+    def get_rectangle_input(self, input_data_array):
+        try:
+            if "TopRight" not in input_data_array or "BottomLeft" not in input_data_array: return False
+            self.TopRight = (float(input_data_array[input_data_array.index('TopRight') + 1]),
+                             float(input_data_array[input_data_array.index('TopRight') + 2]))
+            self.BottomLeft = (float(input_data_array[input_data_array.index('BottomLeft') + 1]),
+                               float(input_data_array[input_data_array.index('BottomLeft') + 2]))
+            return True
+        except Exception:
+            return False
+
+    def calculate_perimeter_rectangle(self):
+        if not self.TopRight or not self.BottomLeft: return None
+        self.perimeter = 2 * ((self.TopRight[0] - self.BottomLeft[0]) + (self.TopRight[1] - self.BottomLeft[1]))
+        if self.perimeter < 0: self.perimeter *= -1
+
+    def calculate_area_rectangle(self):
+        if not self.TopRight or not self.BottomLeft: return None
+        self.area = (self.TopRight[0] - self.BottomLeft[0]) * (self.TopRight[1] - self.BottomLeft[1])
+        if self.area < 0: self.area *= -1
+
+
+class Square(Rectangle):
     def __init__(self):
         super().__init__(name="Square")
         self.TopRight = None
@@ -82,38 +115,6 @@ class Square(Shape):
         if not self.Side: return None
         self.area = self.Side * self.Side
 
-
-class Rectangle(Shape):
-    def __init__(self):
-        super().__init__(name="Rectangle")
-        self.TopRight = None
-        self.BottomLeft = None
-
-    def calculate(self, input_data_array):
-        if not self.get_rectangle_input(input_data_array): self.get_points_input(input_data_array)
-        if not self.calculate_perimeter_rectangle(): self.calculate_perimeter_pointed()
-        if not self.calculate_area_rectangle(): self.calculate_area_pointed()
-
-    def get_rectangle_input(self, input_data_array):
-        try:
-            if "TopRight" not in input_data_array or "BottomLeft" not in input_data_array: return False
-            self.TopRight = (float(input_data_array[input_data_array.index('TopRight') + 1]),
-                             float(input_data_array[input_data_array.index('TopRight') + 2]))
-            self.BottomLeft = (float(input_data_array[input_data_array.index('BottomLeft') + 1]),
-                               float(input_data_array[input_data_array.index('BottomLeft') + 2]))
-            return True
-        except Exception:
-            return False
-
-    def calculate_perimeter_rectangle(self):
-        if not self.TopRight or not self.BottomLeft: return None
-        self.perimeter = 2 * ((self.TopRight[0] - self.BottomLeft[0]) + (self.TopRight[1] - self.BottomLeft[1]))
-        if self.perimeter < 0: self.perimeter *= -1
-
-    def calculate_area_rectangle(self):
-        if not self.TopRight or not self.BottomLeft: return None
-        self.area = (self.TopRight[0] - self.BottomLeft[0]) * (self.TopRight[1] - self.BottomLeft[1])
-        if self.area < 0: self.area *= -1
 
 
 class Circle(Shape):
