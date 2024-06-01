@@ -1,5 +1,5 @@
 from src.utils import get_input, dispatcher
-from src.scheme import Shape
+from src.scheme import Polygon
 
 
 def main():

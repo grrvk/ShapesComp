@@ -1,6 +1,6 @@
 import numpy as np
 
-from src.scheme import Shape, ShapesEnum
+from src.scheme import Polygon, ShapesEnum
 
 
 def get_input():
@@ -21,4 +21,4 @@ def dispatcher(input_data):
     try:
         return ShapesEnum[name].value(), input_data_array[1:]
     except KeyError:
-        return Shape(name), input_data_array[1:]
+        return Polygon(name), input_data_array[1:]

@@ -7,11 +7,16 @@ def get_line_length(a: tuple, b: tuple):
 
 
 class Shape:
-    def __init__(self, name=None):
-        self.points = None
-        self.area = None
-        self.perimeter = None
+    def __init__(self, name):
         self.name = name
+        self.perimeter = None
+        self.area = None
+
+
+class Polygon(Shape):
+    def __init__(self, name=None):
+        super().__init__(name)
+        self.points = None
 
     def calculate(self, input_data_array):
         self.get_points_input(input_data_array)
@@ -50,7 +55,7 @@ class Shape:
             return f'Shape {self.name}: Invalid input. Cannot compute perimeter and area'
 
 
-class Rectangle(Shape):
+class Rectangle(Polygon):
     def __init__(self, name="Rectangle"):
         super().__init__(name=name)
         self.TopRight = None

@@ -2,7 +2,7 @@ import pytest
 import sys
 
 sys.path.append(".")
-from src.scheme import Shape
+from src.scheme import Polygon
 from src.utils import dispatcher
 
 
