@@ -58,8 +58,8 @@ class Rectangle(Shape):
 
     def calculate(self, input_data_array):
         if not self.get_rectangle_input(input_data_array): self.get_points_input(input_data_array)
-        if not self.calculate_perimeter(): super().calculate_perimeter()
-        if not self.calculate_area(): super().calculate_area()
+        self.calculate_perimeter()
+        self.calculate_area()
 
     def get_rectangle_input(self, input_data_array):
         try:
@@ -73,12 +73,16 @@ class Rectangle(Shape):
             return False
 
     def calculate_perimeter(self):
-        if not self.TopRight or not self.BottomLeft: return None
+        if not self.TopRight or not self.BottomLeft:
+            super().calculate_perimeter()
+            return
         self.perimeter = 2 * ((self.TopRight[0] - self.BottomLeft[0]) + (self.TopRight[1] - self.BottomLeft[1]))
         if self.perimeter < 0: self.perimeter *= -1
 
     def calculate_area(self):
-        if not self.TopRight or not self.BottomLeft: return None
+        if not self.TopRight or not self.BottomLeft:
+            super().calculate_area()
+            return
         self.area = (self.TopRight[0] - self.BottomLeft[0]) * (self.TopRight[1] - self.BottomLeft[1])
         if self.area < 0: self.area *= -1
 
@@ -91,8 +95,8 @@ class Square(Rectangle):
 
     def calculate(self, input_data_array):
         if not self.get_square_input(input_data_array): self.get_points_input(input_data_array)
-        if not self.calculate_perimeter(): self.calculate_perimeter()
-        if not self.calculate_area(): self.calculate_area()
+        if not self.calculate_perimeter(): super().calculate_perimeter()
+        if not self.calculate_area(): super().calculate_area()
 
     def get_square_input(self, input_data_array):
         try:
